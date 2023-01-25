@@ -55,7 +55,7 @@ services:
 2. Run the command `docker compose pull`
 3. Go to `localhost:3000` to access the frontend
 
-# Running the source code directly
+# Option 2: Running the source code directly
 ## Installing dependencies
 
 ```bash

@@ -1,7 +1,61 @@
 # CS3219-AY22-23-Project-Skeleton
 
-This is a template repository for CS3219 project.
+# Option 1: Run the web application using docker only
+## You can try the web application by using docker and without cloning this repo
 
+1. Copy and paste the snippet below into a file called docker-compose.yml
+```
+version: '3.1'
+
+services:
+  frontend:
+    image: cwq2326/pp-frontend
+    ports:
+      - "3000:3000"
+  user-service:
+    ports:
+      - "8080:8080"
+    restart: always
+    image: cwq2326/pp-user-service
+    links:
+      - mongo
+  question-service:
+    image: cwq2326/pp-question-service
+    ports:
+      - "8090:8090"
+    restart: always
+    links:
+      - mongo
+  matching-service:
+    image: cwq2326/pp-matching-service
+    ports:
+      - "5003:5003"
+    restart: always
+    links:
+      - mongo
+  collaboration-service:
+    image: cwq2326/pp-collaboration-service
+    ports:
+      - "5001:5001"
+    restart: always
+  chat-service:
+    image: cwq2326/pp-chat-service
+    ports:
+      - "5005:5005"
+    restart: always
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    restart: always
+    ports:
+      - 27017:27017
+```
+2. Run the command `docker compose pull`
+3. Go to `localhost:3000` to access the frontend
+
+# Running the source code directly
 ## Installing dependencies
 
 ```bash

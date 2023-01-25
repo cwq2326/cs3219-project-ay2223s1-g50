@@ -1,6 +1,6 @@
 # CS3219-AY22-23-Project-Skeleton
 
-# Option 1: Run the web application using docker only
+## Option 1: Run the web application using docker only
 ## You can try the web application by using docker and without cloning this repo
 
 1. Copy and paste the snippet below into a file called docker-compose.yml
@@ -52,10 +52,10 @@ services:
     ports:
       - 27017:27017
 ```
-2. Run the command `docker compose pull`
-3. Go to `localhost:3000` to access the frontend
+2. Run the command `docker-compose up`
+3. Once all 7 containers are running, go to `localhost:3000` to access the frontend
 
-# Option 2: Running the source code directly
+## Option 2: Running the source code directly
 ## Installing dependencies
 
 ```bash

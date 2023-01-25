@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import questions from '../util.js';
 
 const Schema = mongoose.Schema;
 
@@ -57,4 +58,5 @@ const getQuestionsByDifficulty = async (difficulty) => {
   }
 };
 
-export default { createQuestion, getQuestions, getQuestionsByDifficulty, };
+
+export default { createQuestion, getQuestions, getQuestionsByDifficulty};

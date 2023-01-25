@@ -98,7 +98,7 @@ function SignupPage() {
     }
 
     setIsLoading(true)
-    try {
+      try {
       const res = await axios.post(URL_REGISTER_USER_SVC, {
         username,
         password,
@@ -109,7 +109,7 @@ function SignupPage() {
         setIsSignupSuccess(true)
 
         const res = await axios.post(URL_LOGIN_USER_SVC, { username, password })
-
+        console.log(res)
         if (res?.status == STATUS_CODE_SUCCESS) {
           userContext.setUsername(username)
           userContext.setToken(res.data.accessToken)
@@ -118,8 +118,18 @@ function SignupPage() {
         }
       }
     } catch (err) {
-      setErrorDialog(err.message, USER_SERVICE_NETWORK_ERROR_MESSAGE)
+      if (err.response.status === STATUS_CODE_CREATED) {
+        setSuccessDialog('Account successfully created')
+        setIsSignupSuccess(true)
+      } else if (err.response.status === 409) {
+        setErrorDialog(err.message, 'Username already taken!')
+        setIsSignupSuccess(true)
+      } else {
+        setErrorDialog(err.message, USER_SERVICE_NETWORK_ERROR_MESSAGE)
+        setIsSignupSuccess(true)
+      }
     }
+
     setIsLoading(false)
   }
 

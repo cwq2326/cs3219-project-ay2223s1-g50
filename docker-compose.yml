@@ -1,12 +1,13 @@
 # This docker-compose file is used for development purposes
 # so that we can spin up the services locally in Docker quickly
 
-version: '3'
+version: '3.1'
 services:
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
+    image: cwq2326/pp-frontend
     ports:
       - "3000:3000"
       # network_mode: host
@@ -16,34 +17,58 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "8080:8080"
+    restart: always
+    image: cwq2326/pp-user-service
+    links:
+      - mongo
     # network_mode: host
   question-service:
     build:
       context: ./question-service
       dockerfile: Dockerfile.dev
+    image: cwq2326/pp-question-service
     ports:
       - "8090:8090"
+    restart: always
+    links:
+      - mongo
     # network_mode: host
   matching-service:
     build: 
       context: ./matching-service
       dockerfile: Dockerfile.dev
+    image: cwq2326/pp-matching-service
     ports:
       - "5003:5003"
+    restart: always
+    links:
+      - mongo
     # network_mode: host
   collaboration-service:
     build: 
       context: ./collaboration-service
       dockerfile: Dockerfile.dev
+    image: cwq2326/pp-collaboration-service
     ports:
       - "5001:5001"
+    restart: always
     # network_mode: host
   chat-service:
     build: 
       context: ./chat-service
       dockerfile: Dockerfile.dev
+    image: cwq2326/pp-chat-service
     ports:
       - "5005:5005"
+    restart: always
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    restart: always
+    ports:
+      - 27017:27017
     # network_mode: host
 
 # use network_mode host to allow communication BETWEEN service containers via localhost

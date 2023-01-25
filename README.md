@@ -1,4 +1,4 @@
-# CS3219-AY22-23-Project-Skeleton
+# CS3219-AY22-23-Project, PeerPrep
 
 ## Option 1: Run the web application using docker only
 ## You can try the web application by using docker and without cloning this repo
